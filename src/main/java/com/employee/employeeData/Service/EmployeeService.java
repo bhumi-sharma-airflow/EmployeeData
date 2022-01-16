@@ -4,15 +4,16 @@ import com.employee.employeeData.DTO.response.EmployeeDetails;
 import com.employee.employeeData.Entities.Employee;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface EmployeeService
 {
     public List<EmployeeDetails> getData();
 
-    public Optional<Employee> getData(long employeeId);
+    public EmployeeDetails getData(long employeeId);
 
-    public Employee setData(String Name, String Designation);
+    public Employee setData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails);
 
     public void deleteEmployee(long parseLong);
+
+    public EmployeeDetails updateData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails);
 }

@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class MyController
@@ -24,15 +23,19 @@ public class MyController
     }
 
     @GetMapping("/employeeData/{employeeId}")
-    public Optional<Employee> getData(@PathVariable String employeeId)
+    public EmployeeDetails getData(@PathVariable String employeeId)
     {
         return this.employeeService.getData(Long.parseLong(employeeId));
     }
 
     @PostMapping("/employeeData")
-    public Employee setData(@RequestBody Employee e)
+    public Employee setData(@RequestBody com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails)
     {
-        return this.employeeService.setData(e.getEmployeeName(),e.getDesignation());
+        return this.employeeService.setData(employeeDetails);
+    }
+    @PutMapping("/employeeData")
+    public EmployeeDetails updateData(@RequestBody com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails){
+        return this.employeeService.updateData(employeeDetails);
     }
 
     @DeleteMapping("/employeeData/{employeeId}")

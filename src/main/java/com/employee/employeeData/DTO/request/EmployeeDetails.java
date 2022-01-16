@@ -1,13 +1,12 @@
-package com.employee.employeeData.DTO.response;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+package com.employee.employeeData.DTO.request;
 
 public class EmployeeDetails {
     private long EmployeeId;
     private String EmployeeName;
-    private LocalDate JoiningDate;
     private String Designation;
+
+    public EmployeeDetails() {
+    }
 
     public long getEmployeeId() {
         return EmployeeId;
@@ -25,22 +24,11 @@ public class EmployeeDetails {
         EmployeeName = employeeName;
     }
 
-    public LocalDate getJoiningDate() {
-        return JoiningDate;
-    }
-
-    public void setJoiningDate(LocalDate joiningDate) {
-        JoiningDate = joiningDate;
-    }
-
     public String getDesignation() {
         return Designation;
     }
 
     public void setDesignation(String designation) {
         Designation = designation;
-    }
-
-    public EmployeeDetails() {
     }
 }

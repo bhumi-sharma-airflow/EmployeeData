@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeeServiceImplementation implements EmployeeService
@@ -35,16 +35,25 @@ public class EmployeeServiceImplementation implements EmployeeService
     }
 
     @Override
-    public Optional<Employee> getData(long employeeId)
+    public EmployeeDetails getData(long employeeId)
     {
-        return employeeDao.findById(employeeId);
+        Employee employee=employeeDao.getById(employeeId);
+        EmployeeDetails employeeDetails=new EmployeeDetails();
+        employeeDetails.setEmployeeId(employee.getEmployeeId());
+        employeeDetails.setEmployeeName(employee.getEmployeeName());
+        employeeDetails.setDesignation(employee.getDesignation());
+        employeeDetails.setJoiningDate(employee.getJoiningDate());
+        return employeeDetails;
+
     }
 
     @Override
-    public Employee setData(String Name, String Designation)
+    public Employee setData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails)
     {
-        LocalDate d= LocalDate.now();
-        Employee employee=new Employee(Name,d,Designation);
+        LocalDateTime createdDate= LocalDateTime.now();
+        LocalDateTime updatedDate= LocalDateTime.now();
+        LocalDate joiningDate=LocalDate.now();
+        Employee employee=new Employee(employeeDetails.getEmployeeName(),joiningDate,createdDate,updatedDate,employeeDetails.getDesignation());
         employeeDao.save(employee);
         return employee;
     }
@@ -54,5 +63,25 @@ public class EmployeeServiceImplementation implements EmployeeService
     {
         Employee entity=employeeDao.getById(parseLong);
         employeeDao.delete(entity);
+    }
+
+    @Override
+    public EmployeeDetails updateData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails)
+    {
+        Employee employee = employeeDao.getById(employeeDetails.getEmployeeId());
+        employee.setEmployeeName(employeeDetails.getEmployeeName());
+        employee.setDesignation(employeeDetails.getDesignation());
+        LocalDateTime dateTime = LocalDateTime.now();
+        employee.setUpdatedDate(dateTime);
+
+        Employee employee1= employeeDao.save(employee);
+
+        EmployeeDetails employeeDetails1=new EmployeeDetails();
+
+        employeeDetails1.setEmployeeId(employee1.getEmployeeId());
+        employeeDetails1.setEmployeeName(employee1.getEmployeeName());
+        employeeDetails1.setDesignation(employee1.getDesignation());
+        employeeDetails1.setJoiningDate(employee1.getJoiningDate());
+        return employeeDetails1;
     }
 }
