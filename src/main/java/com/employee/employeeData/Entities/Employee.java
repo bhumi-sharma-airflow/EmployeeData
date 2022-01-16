@@ -1,14 +1,13 @@
 package com.employee.employeeData.Entities;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 @Entity
-public class Employee {
+public class Employee
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -19,12 +18,13 @@ public class Employee {
     private LocalDateTime CreatedDate;
     private String Designation;
 
-    public Employee() {
+    public Employee()
+    {
     }
 
-
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Employee{" +
                 "EmployeeId=" + EmployeeId +
                 ", EmployeeName='" + EmployeeName + '\'' +
@@ -43,58 +43,71 @@ public class Employee {
         Designation = designation;
     }
 
-    public Employee(String employeeName, LocalDate joiningDate, LocalDateTime updatedDate, String designation) {
+    public Employee(String employeeName, LocalDate joiningDate, LocalDateTime updatedDate, String designation)
+    {
         EmployeeName = employeeName;
         JoiningDate = joiningDate;
         UpdatedDate = updatedDate;
         Designation = designation;
     }
 
-    public long getEmployeeId() {
+    public long getEmployeeId()
+    {
         return EmployeeId;
     }
 
-    public void setEmployeeId(long employeeId) {
+    public void setEmployeeId(long employeeId)
+    {
         EmployeeId = employeeId;
     }
 
-    public String getEmployeeName() {
+    public String getEmployeeName()
+    {
         return EmployeeName;
     }
 
-    public void setEmployeeName(String employeeName) {
+    public void setEmployeeName(String employeeName)
+    {
         EmployeeName = employeeName;
     }
 
-    public LocalDate getJoiningDate() {
+    public LocalDate getJoiningDate()
+    {
         return JoiningDate;
     }
 
-    public void setJoiningDate(LocalDate joiningDate) {
+    public void setJoiningDate(LocalDate joiningDate)
+    {
         JoiningDate = joiningDate;
     }
 
-    public LocalDateTime getUpdatedDate() {
+    public LocalDateTime getUpdatedDate()
+    {
         return UpdatedDate;
     }
 
-    public void setUpdatedDate(LocalDateTime updatedDate) {
+    public void setUpdatedDate(LocalDateTime updatedDate)
+    {
         UpdatedDate = updatedDate;
     }
 
-    public LocalDateTime getCreatedDate() {
+    public LocalDateTime getCreatedDate()
+    {
         return CreatedDate;
     }
 
-    public void setCreatedDate(LocalDateTime createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate)
+    {
         CreatedDate = createdDate;
     }
 
-    public String getDesignation() {
+    public String getDesignation()
+    {
         return Designation;
     }
 
-    public void setDesignation(String designation) {
+    public void setDesignation(String designation)
+    {
         Designation = designation;
     }
 }

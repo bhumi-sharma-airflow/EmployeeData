@@ -75,8 +75,8 @@ public class EmployeeServiceImplementation implements EmployeeService
     @Override
     public ResponseEntity<String> updateData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails)
     {
-
-        if(employeeDao.existsById(employeeDetails.getEmployeeId())) {
+        if(employeeDao.existsById(employeeDetails.getEmployeeId()))
+        {
             Employee employee = employeeDao.getById(employeeDetails.getEmployeeId());
             employee.setEmployeeName(employeeDetails.getEmployeeName());
             employee.setDesignation(employeeDetails.getDesignation());
