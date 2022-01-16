@@ -1,9 +1,9 @@
 package com.employee.employeeData.DTO.request;
 public class EmployeeDetails
 {
-    private long EmployeeId;
-    private String EmployeeName;
-    private String Designation;
+    private long employeeId;
+    private String employeeName;
+    private String designation;
 
     public EmployeeDetails()
     {
@@ -11,31 +11,31 @@ public class EmployeeDetails
 
     public long getEmployeeId()
     {
-        return EmployeeId;
+        return this.employeeId;
     }
 
     public void setEmployeeId(long employeeId)
     {
-        EmployeeId = employeeId;
+        this.employeeId=employeeId;
     }
 
     public String getEmployeeName()
     {
-        return EmployeeName;
+        return this.employeeName;
     }
 
     public void setEmployeeName(String employeeName)
     {
-        EmployeeName = employeeName;
+        this.employeeName = employeeName;
     }
 
     public String getDesignation()
     {
-        return Designation;
+        return this.designation;
     }
 
     public void setDesignation(String designation)
     {
-        Designation = designation;
+        this.designation=designation;
     }
 }

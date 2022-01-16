@@ -10,7 +10,7 @@ public interface EmployeeService
 {
     public List<EmployeeDetails> getData();
 
-    public EmployeeDetails getData(long employeeId);
+    ResponseEntity<EmployeeDetails> getData(long employeeId);
 
     public Employee setData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails);
 

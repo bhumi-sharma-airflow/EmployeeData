@@ -11,12 +11,12 @@ public class Employee
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long EmployeeId;
-    private String EmployeeName;
-    private LocalDate JoiningDate;
-    private LocalDateTime UpdatedDate;
-    private LocalDateTime CreatedDate;
-    private String Designation;
+    private long employeeId;
+    private String employeeName;
+    private LocalDate joiningDate;
+    private LocalDateTime updatedDate;
+    private LocalDateTime createdDate;
+    private String designation;
 
     public Employee()
     {
@@ -26,88 +26,88 @@ public class Employee
     public String toString()
     {
         return "Employee{" +
-                "EmployeeId=" + EmployeeId +
-                ", EmployeeName='" + EmployeeName + '\'' +
-                ", JoiningDate=" + JoiningDate +
-                ", UpdatedDate=" + UpdatedDate +
-                ", Designation='" + Designation + '\'' +
+                "EmployeeId=" + this.employeeId +
+                ", EmployeeName='" + this.employeeName + '\'' +
+                ", JoiningDate=" + this.joiningDate +
+                ", UpdatedDate=" + this.updatedDate +
+                ", Designation='" + this.designation + '\'' +
                 '}';
     }
 
     public Employee(String employeeName, LocalDate joiningDate, LocalDateTime createdDate, LocalDateTime updatedDate, String designation)
     {
-        EmployeeName = employeeName;
-        JoiningDate = joiningDate;
-        UpdatedDate = updatedDate;
-        CreatedDate = createdDate;
-        Designation = designation;
+        this.employeeName = employeeName;
+        this.joiningDate = joiningDate;
+        this.updatedDate = updatedDate;
+        this.createdDate = createdDate;
+        this.designation = designation;
     }
 
     public Employee(String employeeName, LocalDate joiningDate, LocalDateTime updatedDate, String designation)
     {
-        EmployeeName = employeeName;
-        JoiningDate = joiningDate;
-        UpdatedDate = updatedDate;
-        Designation = designation;
+        this.employeeName = employeeName;
+        this.joiningDate = joiningDate;
+        this.updatedDate = updatedDate;
+        this.designation = designation;
     }
 
     public long getEmployeeId()
     {
-        return EmployeeId;
+        return this.employeeId;
     }
 
     public void setEmployeeId(long employeeId)
     {
-        EmployeeId = employeeId;
+        this.employeeId = employeeId;
     }
 
     public String getEmployeeName()
     {
-        return EmployeeName;
+        return this.employeeName;
     }
 
     public void setEmployeeName(String employeeName)
     {
-        EmployeeName = employeeName;
+        this.employeeName = employeeName;
     }
 
     public LocalDate getJoiningDate()
     {
-        return JoiningDate;
+        return this.joiningDate;
     }
 
     public void setJoiningDate(LocalDate joiningDate)
     {
-        JoiningDate = joiningDate;
+        this.joiningDate = joiningDate;
     }
 
     public LocalDateTime getUpdatedDate()
     {
-        return UpdatedDate;
+        return this.updatedDate;
     }
 
     public void setUpdatedDate(LocalDateTime updatedDate)
     {
-        UpdatedDate = updatedDate;
+        this.updatedDate = updatedDate;
     }
 
     public LocalDateTime getCreatedDate()
     {
-        return CreatedDate;
+        return this.createdDate;
     }
 
     public void setCreatedDate(LocalDateTime createdDate)
     {
-        CreatedDate = createdDate;
+        this.createdDate = createdDate;
     }
 
     public String getDesignation()
     {
-        return Designation;
+        return this.designation;
     }
 
     public void setDesignation(String designation)
     {
-        Designation = designation;
+        this.designation = designation;
     }
 }

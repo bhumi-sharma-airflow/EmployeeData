@@ -21,7 +21,7 @@ public class MyController
     }
 
     @GetMapping("/employeeData/{employeeId}")
-    public EmployeeDetails getData(@PathVariable String employeeId)
+    public ResponseEntity<EmployeeDetails> getData(@PathVariable String employeeId)
     {
         return this.employeeService.getData(Long.parseLong(employeeId));
     }

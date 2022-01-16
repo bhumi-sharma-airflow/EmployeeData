@@ -37,21 +37,25 @@ public class EmployeeServiceImplementation implements EmployeeService
     }
 
     @Override
-    public EmployeeDetails getData(long employeeId)
+    public ResponseEntity<EmployeeDetails> getData(long employeeId)
     {
-        Employee employee=employeeDao.getById(employeeId);
-        EmployeeDetails employeeDetails=new EmployeeDetails();
-        employeeDetails.setEmployeeId(employee.getEmployeeId());
-        employeeDetails.setEmployeeName(employee.getEmployeeName());
-        employeeDetails.setDesignation(employee.getDesignation());
-        employeeDetails.setJoiningDate(employee.getJoiningDate());
-        return employeeDetails;
-
+        Employee employee = employeeDao.getById(employeeId);
+        EmployeeDetails employeeDetails = new EmployeeDetails();
+        if(employeeDao.existsById(employeeId))
+        {
+            employeeDetails.setEmployeeId(employee.getEmployeeId());
+            employeeDetails.setEmployeeName(employee.getEmployeeName());
+            employeeDetails.setDesignation(employee.getDesignation());
+            employeeDetails.setJoiningDate(employee.getJoiningDate());
+            return ResponseEntity.status(HttpStatus.OK).body(employeeDetails);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
     @Override
     public Employee setData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails)
     {
+
         LocalDateTime createdDate= LocalDateTime.now();
         LocalDateTime updatedDate= LocalDateTime.now();
         LocalDate joiningDate=LocalDate.now();

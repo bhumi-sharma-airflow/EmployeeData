@@ -3,41 +3,42 @@ import java.time.LocalDate;
 
 public class EmployeeDetails
 {
-    private long EmployeeId;
-    private String EmployeeName;
-    private LocalDate JoiningDate;
-    private String Designation;
+    private long employeeId;
+    private String employeeName;
+    private LocalDate joiningDate;
+    private String designation;
+
     public long getEmployeeId()
     {
-        return EmployeeId;
+        return this.employeeId;
     }
     public void setEmployeeId(long employeeId)
     {
-        EmployeeId = employeeId;
+        this.employeeId = employeeId;
     }
     public String getEmployeeName()
     {
-        return EmployeeName;
+        return this.employeeName;
     }
     public void setEmployeeName(String employeeName)
     {
-        EmployeeName = employeeName;
+        this.employeeName = employeeName;
     }
     public LocalDate getJoiningDate()
     {
-        return JoiningDate;
+        return this.joiningDate;
     }
     public void setJoiningDate(LocalDate joiningDate)
     {
-        JoiningDate = joiningDate;
+        this.joiningDate = joiningDate;
     }
     public String getDesignation()
     {
-        return Designation;
+        return this.designation;
     }
     public void setDesignation(String designation)
     {
-        Designation = designation;
+        this.designation = designation;
     }
     public EmployeeDetails()
     {
