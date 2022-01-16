@@ -4,6 +4,8 @@ import com.employee.employeeData.DTO.response.EmployeeDetails;
 import com.employee.employeeData.Dao.EmployeeDao;
 import com.employee.employeeData.Entities.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -59,29 +61,30 @@ public class EmployeeServiceImplementation implements EmployeeService
     }
 
     @Override
-    public void deleteEmployee(long parseLong)
+    public ResponseEntity<String> deleteEmployee(long parseLong)
     {
-        Employee entity=employeeDao.getById(parseLong);
-        employeeDao.delete(entity);
+        if(employeeDao.existsById(parseLong))
+        {
+            Employee entity=employeeDao.getById(parseLong);
+            employeeDao.delete(entity);
+            return ResponseEntity.status(HttpStatus.OK).body("Employee Deleted Sucessfully");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee Not Found");
     }
 
     @Override
-    public EmployeeDetails updateData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails)
+    public ResponseEntity<String> updateData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails)
     {
-        Employee employee = employeeDao.getById(employeeDetails.getEmployeeId());
-        employee.setEmployeeName(employeeDetails.getEmployeeName());
-        employee.setDesignation(employeeDetails.getDesignation());
-        LocalDateTime dateTime = LocalDateTime.now();
-        employee.setUpdatedDate(dateTime);
 
-        Employee employee1= employeeDao.save(employee);
-
-        EmployeeDetails employeeDetails1=new EmployeeDetails();
-
-        employeeDetails1.setEmployeeId(employee1.getEmployeeId());
-        employeeDetails1.setEmployeeName(employee1.getEmployeeName());
-        employeeDetails1.setDesignation(employee1.getDesignation());
-        employeeDetails1.setJoiningDate(employee1.getJoiningDate());
-        return employeeDetails1;
+        if(employeeDao.existsById(employeeDetails.getEmployeeId())) {
+            Employee employee = employeeDao.getById(employeeDetails.getEmployeeId());
+            employee.setEmployeeName(employeeDetails.getEmployeeName());
+            employee.setDesignation(employeeDetails.getDesignation());
+            LocalDateTime dateTime = LocalDateTime.now();
+            employee.setUpdatedDate(dateTime);
+            Employee employee1= employeeDao.save(employee);
+            return ResponseEntity.status(HttpStatus.OK).body("Employee Updated Successfully");
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee Not found");
     }
 }
