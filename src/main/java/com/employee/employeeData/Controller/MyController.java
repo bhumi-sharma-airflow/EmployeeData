@@ -1,5 +1,6 @@
 package com.employee.employeeData.Controller;
 
+import com.employee.employeeData.DTO.response.EmployeeDetails;
 import com.employee.employeeData.Entities.Employee;
 import com.employee.employeeData.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class MyController
     private EmployeeService employeeService;
 
     @GetMapping("/employeeData")
-    public List<Employee> getData()
+    public List<EmployeeDetails> getData()
     {
         return this.employeeService.getData();
     }

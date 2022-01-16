@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Employee {
@@ -13,13 +13,13 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long EmployeeId;
     private String EmployeeName;
-    private Date JoiningDate;
+    private LocalDate JoiningDate;
     private String Designation;
 
     public Employee() {
     }
 
-    public Employee(String employeeName, Date joiningDate, String designation) {
+    public Employee(String employeeName, LocalDate joiningDate, String designation) {
         EmployeeName = employeeName;
         JoiningDate = joiningDate;
         Designation = designation;
@@ -41,11 +41,11 @@ public class Employee {
         EmployeeName = employeeName;
     }
 
-    public Date getJoiningDate() {
+    public LocalDate getJoiningDate() {
         return JoiningDate;
     }
 
-    public void setJoiningDate(Date joiningDate) {
+    public void setJoiningDate(LocalDate joiningDate) {
         JoiningDate = joiningDate;
     }
 

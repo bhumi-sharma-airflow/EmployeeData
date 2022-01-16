@@ -1,11 +1,13 @@
 package com.employee.employeeData.Service;
 
+import com.employee.employeeData.DTO.response.EmployeeDetails;
 import com.employee.employeeData.Dao.EmployeeDao;
 import com.employee.employeeData.Entities.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +19,19 @@ public class EmployeeServiceImplementation implements EmployeeService
     private EmployeeDao employeeDao;
 
     @Override
-    public List<Employee> getData()
+    public List<EmployeeDetails> getData()
     {
-        return employeeDao.findAll();
+        List<EmployeeDetails> employeeDetailsList=new LinkedList<>();
+        for(Employee employee:employeeDao.findAll())
+        {
+            EmployeeDetails employeeDetails=new EmployeeDetails();
+            employeeDetails.setEmployeeId(employee.getEmployeeId());
+            employeeDetails.setEmployeeName(employee.getEmployeeName());
+            employeeDetails.setDesignation(employee.getDesignation());
+            employeeDetails.setJoiningDate(employee.getJoiningDate());
+            employeeDetailsList.add(employeeDetails);
+        }
+        return employeeDetailsList;
     }
 
     @Override
@@ -31,7 +43,7 @@ public class EmployeeServiceImplementation implements EmployeeService
     @Override
     public Employee setData(String Name, String Designation)
     {
-        Date d=new Date();
+        LocalDate d= LocalDate.now();
         Employee employee=new Employee(Name,d,Designation);
         employeeDao.save(employee);
         return employee;
