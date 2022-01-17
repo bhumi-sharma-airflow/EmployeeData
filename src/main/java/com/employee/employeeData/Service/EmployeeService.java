@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface EmployeeService
 {
-    public List<EmployeeDetails> getData();
+    public List<EmployeeDetails> getData(int page, int pageSize);
 
     ResponseEntity<EmployeeDetails> getData(long employeeId);
 

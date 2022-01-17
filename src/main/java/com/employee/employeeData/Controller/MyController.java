@@ -15,9 +15,9 @@ public class MyController
     private EmployeeService employeeService;
 
     @GetMapping("/employeeData")
-    public List<EmployeeDetails> getData()
+    public List<EmployeeDetails> getData(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize)
     {
-        return this.employeeService.getData();
+        return this.employeeService.getData(page,pageSize);
     }
 
     @GetMapping("/employeeData/{employeeId}")

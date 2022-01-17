@@ -4,6 +4,8 @@ import com.employee.employeeData.DTO.response.EmployeeDetails;
 import com.employee.employeeData.Dao.EmployeeDao;
 import com.employee.employeeData.Entities.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,10 +23,11 @@ public class EmployeeServiceImplementation implements EmployeeService
     private EmployeeDao employeeDao;
 
     @Override
-    public List<EmployeeDetails> getData()
+    public List<EmployeeDetails> getData(int page, int pageSize)
     {
         List<EmployeeDetails> employeeDetailsList=new LinkedList<>();
-        for(Employee employee:employeeDao.findAll())
+        Pageable page1= PageRequest.of(page,pageSize);
+        for(Employee employee:employeeDao.findAll(page1))
         {
             EmployeeDetails employeeDetails=new EmployeeDetails();
             employeeDetails.setEmployeeId(employee.getEmployeeId());
