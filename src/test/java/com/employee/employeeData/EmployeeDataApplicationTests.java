@@ -60,15 +60,20 @@ class EmployeeDataApplicationTests
 	public void givenEmployeeId_WhenDeleteRequestisRaise_thanItshouldBeDeletedFromDatabase()
 	{
 		long employeeResignedId=5;
-
-        ArgumentCaptor<Long> employeeIdCapturer = ArgumentCaptor.forClass(Long.class);
+        LocalDate date = LocalDate.now();
+        LocalDateTime dateTime =LocalDateTime.now();
+        Employee employee=new Employee("Bhumi",date,dateTime,dateTime,"job");
+        employee.setEmployeeId(employeeResignedId);
 
         when(employeeDao.existsById(employeeResignedId)).thenReturn(true);
+        employeeDao.delete(employee);
+        ResponseEntity<String> expected=ResponseEntity.status(HttpStatus.OK).body("Employee Deleted Successfully");
 
-        employeeServiceImplementation.deleteEmployee(employeeResignedId);
+        ArgumentCaptor<Long> employeeIdCapturer = ArgumentCaptor.forClass(Long.class);
+        ResponseEntity<String> actual=employeeServiceImplementation.deleteEmployee(employeeResignedId);
         verify(employeeDao,times(1)).getById(employeeIdCapturer.capture());
-
         assertEquals(employeeResignedId, employeeIdCapturer.getValue());
+        assertEquals(expected,actual);
 	}
 
     @Test
@@ -81,7 +86,7 @@ class EmployeeDataApplicationTests
         employeeDetails.setDesignation("job");
         LocalDate date = LocalDate.now();
         LocalDateTime dateTime =LocalDateTime.now();
-        Employee employee = new Employee("het",date,dateTime,dateTime,"job");
+        Employee employee = new Employee("bhumi",date,dateTime,dateTime,"job");
         employee.setEmployeeId(employeeId);
         ArgumentCaptor<Employee> employee1 = ArgumentCaptor.forClass(Employee.class);
         when(employeeDao.existsById(employeeId)).thenReturn(true);
