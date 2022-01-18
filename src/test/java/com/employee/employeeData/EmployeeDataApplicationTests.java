@@ -30,7 +30,7 @@ class EmployeeDataApplicationTests
 	private EmployeeServiceImplementation employeeServiceImplementation;
 
     @Test
-    public void givenGetId()
+    public void WillGivetheData_WhenTheIdMatches_thenReturnTheData()
     {
         long employeeId=2;
         LocalDate date = LocalDate.now();
@@ -69,10 +69,10 @@ class EmployeeDataApplicationTests
         employeeDao.delete(employee);
         ResponseEntity<String> expected=ResponseEntity.status(HttpStatus.OK).body("Employee Deleted Successfully");
 
-        ArgumentCaptor<Long> employeeIdCapturer = ArgumentCaptor.forClass(Long.class);
+        ArgumentCaptor<Long> employeeIdCaptor = ArgumentCaptor.forClass(Long.class);
         ResponseEntity<String> actual=employeeServiceImplementation.deleteEmployee(employeeResignedId);
-        verify(employeeDao,times(1)).getById(employeeIdCapturer.capture());
-        assertEquals(employeeResignedId, employeeIdCapturer.getValue());
+        verify(employeeDao,times(1)).getById(employeeIdCaptor.capture());
+        assertEquals(employeeResignedId, employeeIdCaptor.getValue());
         assertEquals(expected,actual);
 	}
 
@@ -119,7 +119,7 @@ class EmployeeDataApplicationTests
     }
 
     @Test
-    public void page()
+    public void WilGiveAllData_WhenTheAllDataIsRequested_thenItWillReturnsAllTheData()
     {
         LocalDate date = LocalDate.now();
         LocalDateTime dateTime =LocalDateTime.now();
@@ -158,12 +158,12 @@ class EmployeeDataApplicationTests
         }
     }
 
-    @Test
-    public void test()
-    {
-        Employee employee=new Employee();
-        employee.setEmployeeName("Bhumi");
-        when(employeeDao.findById(2l)).thenReturn(Optional.of(employee));
-        employeeDao.findById(2l);
-    }
+//    @Test
+//    public void test()
+//    {
+//        Employee employee=new Employee();
+//        employee.setEmployeeName("Bhumi");
+//        when(employeeDao.findById(2l)).thenReturn(Optional.of(employee));
+//        employeeDao.findById(2l);
+//    }
 }
