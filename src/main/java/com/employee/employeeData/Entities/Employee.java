@@ -18,8 +18,16 @@ public class Employee
     private LocalDateTime createdDate;
     private String designation;
 
-    public Employee()
-    {
+    public Employee() {
+    }
+
+    public Employee(long employeeId, String employeeName, LocalDate joiningDate, LocalDateTime updatedDate, LocalDateTime createdDate, String designation) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.joiningDate = joiningDate;
+        this.updatedDate = updatedDate;
+        this.createdDate = createdDate;
+        this.designation = designation;
     }
 
     @Override

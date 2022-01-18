@@ -15,9 +15,9 @@ public class MyController
     private EmployeeService employeeService;
 
     @GetMapping("/employeeData")
-    public List<EmployeeDetails> getData(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize)
+    public List<EmployeeDetails> getData(@RequestParam("page") int page)
     {
-        return this.employeeService.getData(page,pageSize);
+        return this.employeeService.getData(page);
     }
 
     @GetMapping("/employeeData/{employeeId}")
@@ -27,7 +27,7 @@ public class MyController
     }
 
     @PostMapping("/employeeData")
-    public Employee setData(@RequestBody com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails)
+    public EmployeeDetails setData(@RequestBody com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails)
     {
         return this.employeeService.setData(employeeDetails);
     }

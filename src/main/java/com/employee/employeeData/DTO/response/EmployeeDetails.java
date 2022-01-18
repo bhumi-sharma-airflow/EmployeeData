@@ -40,7 +40,11 @@ public class EmployeeDetails
     {
         this.designation = designation;
     }
-    public EmployeeDetails()
-    {
+
+    public EmployeeDetails(long employeeId, String employeeName, LocalDate joiningDate, String designation) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.joiningDate = joiningDate;
+        this.designation = designation;
     }
 }

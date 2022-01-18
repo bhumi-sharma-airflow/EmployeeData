@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface EmployeeService
 {
-    public List<EmployeeDetails> getData(int page, int pageSize);
+    public List<EmployeeDetails> getData(int page);
 
     ResponseEntity<EmployeeDetails> getData(long employeeId);
 
-    public Employee setData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails);
+    public EmployeeDetails setData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails);
 
      ResponseEntity<String> deleteEmployee(long parseLong);
 

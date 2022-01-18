@@ -23,13 +23,13 @@ public class EmployeeServiceImplementation implements EmployeeService
     private EmployeeDao employeeDao;
 
     @Override
-    public List<EmployeeDetails> getData(int page, int pageSize)
+    public List<EmployeeDetails> getData(int page)
     {
         List<EmployeeDetails> employeeDetailsList=new LinkedList<>();
-        Pageable page1= PageRequest.of(page,pageSize);
+        Pageable page1= PageRequest.of(page,3);
         for(Employee employee:employeeDao.findAll(page1))
         {
-            EmployeeDetails employeeDetails=new EmployeeDetails();
+            EmployeeDetails employeeDetails=new EmployeeDetails(employee.getEmployeeId(), employee.getEmployeeName(), employee.getJoiningDate(), employee.getDesignation());
             employeeDetails.setEmployeeId(employee.getEmployeeId());
             employeeDetails.setEmployeeName(employee.getEmployeeName());
             employeeDetails.setDesignation(employee.getDesignation());
@@ -43,7 +43,7 @@ public class EmployeeServiceImplementation implements EmployeeService
     public ResponseEntity<EmployeeDetails> getData(long employeeId)
     {
         Employee employee = employeeDao.getById(employeeId);
-        EmployeeDetails employeeDetails = new EmployeeDetails();
+        EmployeeDetails employeeDetails = new EmployeeDetails(employee.getEmployeeId(), employee.getEmployeeName(), employee.getJoiningDate(), employee.getDesignation());
         if(employeeDao.existsById(employeeId))
         {
             employeeDetails.setEmployeeId(employee.getEmployeeId());
@@ -56,15 +56,19 @@ public class EmployeeServiceImplementation implements EmployeeService
     }
 
     @Override
-    public Employee setData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails)
+    public EmployeeDetails setData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetailsObj)
     {
-
         LocalDateTime createdDate= LocalDateTime.now();
         LocalDateTime updatedDate= LocalDateTime.now();
         LocalDate joiningDate=LocalDate.now();
-        Employee employee=new Employee(employeeDetails.getEmployeeName(),joiningDate,createdDate,updatedDate,employeeDetails.getDesignation());
-        employeeDao.save(employee);
-        return employee;
+        Employee employee=new Employee(employeeDetailsObj.getEmployeeName(),joiningDate,createdDate,updatedDate,employeeDetailsObj.getDesignation());
+        Employee employee1 = employeeDao.save(employee);
+        EmployeeDetails employeeDetails=new EmployeeDetails(employee.getEmployeeId(), employee.getEmployeeName(), employee.getJoiningDate(), employee.getDesignation());
+        employeeDetails.setEmployeeId(employee1.getEmployeeId());
+        employeeDetails.setEmployeeName(employee1.getEmployeeName());
+        employeeDetails.setDesignation(employee1.getDesignation());
+        employeeDetails.setJoiningDate(employee1.getJoiningDate());
+        return employeeDetails;
     }
 
     @Override
