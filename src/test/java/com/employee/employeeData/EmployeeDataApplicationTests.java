@@ -9,6 +9,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +23,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class EmployeeDataApplicationTests
 {
 	@Mock
@@ -114,11 +115,10 @@ class EmployeeDataApplicationTests
         LocalDateTime dateTime =LocalDateTime.now();
 
         List<Employee> employeeList =new ArrayList<>();
-        employeeList.add(new Employee(1,"Sumit",date, dateTime, dateTime,"Job"));
-        employeeList.add(new Employee(2,"Bhumi",date, dateTime, dateTime,"Job"));
-        employeeList.add(new Employee(3,"Het",date, dateTime, dateTime,"Job"));
-        employeeList.add(new Employee(4,"Kaushal",date, dateTime, dateTime,"Job"));
-        employeeList.add(new Employee(5,"Rohan",date, dateTime, dateTime,"Job"));
+        employeeList.add(new Employee(1,"Bhumi",date, dateTime, dateTime,"Job"));
+        employeeList.add(new Employee(2,"Komal",date, dateTime, dateTime,"Intern"));
+        employeeList.add(new Employee(3,"Meet",date, dateTime, dateTime,"Job"));
+        employeeList.add(new Employee(4,"Aman",date, dateTime, dateTime,"Job"));
 
         List<EmployeeDetails> employeeDetailsList=new LinkedList<>();
 
@@ -130,6 +130,7 @@ class EmployeeDataApplicationTests
         int page = 5;
         Pageable firstFiveEmployees = PageRequest.of(page, 3);
         Page<Employee> employeePage = new PageImpl<>(employeeList);
+
         when(employeeDao.findAll(firstFiveEmployees)).thenReturn(employeePage);
 
         List<EmployeeDetails> employeeDetailsResponseEntity = employeeServiceImplementation.getData(page);
@@ -138,7 +139,8 @@ class EmployeeDataApplicationTests
         ArgumentCaptor<EmployeeDetails> employeeArgumentCaptor = ArgumentCaptor.forClass(EmployeeDetails.class);
         verify(employeeDao,times(1)).findAll((Pageable) employeeArgumentCaptor.capture());
 
-        for(int i=0;i<5;i++) {
+        for(int i=0;i<4;i++)
+        {
             assertEquals(expectedEmployeeDetails.get(i).getEmployeeId(), employeeDetailsResponseEntity.get(i).getEmployeeId());
             assertEquals(expectedEmployeeDetails.get(i).getEmployeeName(), employeeDetailsResponseEntity.get(i).getEmployeeName());
             assertEquals(expectedEmployeeDetails.get(i).getJoiningDate(), employeeDetailsResponseEntity.get(i).getJoiningDate());
