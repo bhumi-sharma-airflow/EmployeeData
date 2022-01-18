@@ -1,8 +1,8 @@
 package com.employee.employeeData.DTO.response;
 import java.time.LocalDate;
-
 public class EmployeeDetails
 {
+    //It is Response Layer who returns the data from Database
     private long employeeId;
     private String employeeName;
     private LocalDate joiningDate;
@@ -16,6 +16,7 @@ public class EmployeeDetails
     {
         this.employeeId = employeeId;
     }
+
     public String getEmployeeName()
     {
         return this.employeeName;
@@ -24,6 +25,7 @@ public class EmployeeDetails
     {
         this.employeeName = employeeName;
     }
+
     public LocalDate getJoiningDate()
     {
         return this.joiningDate;
@@ -32,6 +34,7 @@ public class EmployeeDetails
     {
         this.joiningDate = joiningDate;
     }
+
     public String getDesignation()
     {
         return this.designation;
@@ -41,7 +44,8 @@ public class EmployeeDetails
         this.designation = designation;
     }
 
-    public EmployeeDetails(long employeeId, String employeeName, LocalDate joiningDate, String designation) {
+    public EmployeeDetails(long employeeId, String employeeName, LocalDate joiningDate, String designation)
+    {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.joiningDate = joiningDate;

@@ -8,9 +8,12 @@ import java.time.LocalDateTime;
 @Entity
 public class Employee
 {
+    //It is the Main Entity of the Project contains all the fields and Constructor
 
+    //Id is used for auto Generate Id's
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+
     private long employeeId;
     private String employeeName;
     private LocalDate joiningDate;
@@ -18,10 +21,12 @@ public class Employee
     private LocalDateTime createdDate;
     private String designation;
 
-    public Employee() {
+    public Employee()
+    {
     }
 
-    public Employee(long employeeId, String employeeName, LocalDate joiningDate, LocalDateTime updatedDate, LocalDateTime createdDate, String designation) {
+    public Employee(long employeeId, String employeeName, LocalDate joiningDate, LocalDateTime updatedDate, LocalDateTime createdDate, String designation)
+    {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.joiningDate = joiningDate;
@@ -51,19 +56,10 @@ public class Employee
         this.designation = designation;
     }
 
-    public Employee(String employeeName, LocalDate joiningDate, LocalDateTime updatedDate, String designation)
-    {
-        this.employeeName = employeeName;
-        this.joiningDate = joiningDate;
-        this.updatedDate = updatedDate;
-        this.designation = designation;
-    }
-
     public long getEmployeeId()
     {
         return this.employeeId;
     }
-
     public void setEmployeeId(long employeeId)
     {
         this.employeeId = employeeId;
@@ -73,7 +69,6 @@ public class Employee
     {
         return this.employeeName;
     }
-
     public void setEmployeeName(String employeeName)
     {
         this.employeeName = employeeName;
@@ -83,7 +78,6 @@ public class Employee
     {
         return this.joiningDate;
     }
-
     public void setJoiningDate(LocalDate joiningDate)
     {
         this.joiningDate = joiningDate;
@@ -93,7 +87,6 @@ public class Employee
     {
         return this.updatedDate;
     }
-
     public void setUpdatedDate(LocalDateTime updatedDate)
     {
         this.updatedDate = updatedDate;
@@ -103,7 +96,6 @@ public class Employee
     {
         return this.createdDate;
     }
-
     public void setCreatedDate(LocalDateTime createdDate)
     {
         this.createdDate = createdDate;
@@ -113,7 +105,6 @@ public class Employee
     {
         return this.designation;
     }
-
     public void setDesignation(String designation)
     {
         this.designation = designation;

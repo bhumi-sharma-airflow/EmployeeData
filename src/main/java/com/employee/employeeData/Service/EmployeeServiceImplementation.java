@@ -1,5 +1,4 @@
 package com.employee.employeeData.Service;
-
 import com.employee.employeeData.DTO.response.EmployeeDetails;
 import com.employee.employeeData.Dao.EmployeeDao;
 import com.employee.employeeData.Entities.Employee;
@@ -9,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -22,6 +20,7 @@ public class EmployeeServiceImplementation implements EmployeeService
     @Autowired
     private EmployeeDao employeeDao;
 
+    //getData Method for get all data
     @Override
     public List<EmployeeDetails> getData(int page)
     {
@@ -39,6 +38,7 @@ public class EmployeeServiceImplementation implements EmployeeService
         return employeeDetailsList;
     }
 
+    //Get the Data if  id exists
     @Override
     public ResponseEntity<EmployeeDetails> getData(long employeeId)
     {
@@ -55,6 +55,7 @@ public class EmployeeServiceImplementation implements EmployeeService
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
+    //It set Data into Database
     @Override
     public EmployeeDetails setData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetailsObj)
     {
@@ -71,18 +72,20 @@ public class EmployeeServiceImplementation implements EmployeeService
         return employeeDetails;
     }
 
+    //It Deletes the Employee if it exists
     @Override
-    public ResponseEntity<String> deleteEmployee(long parseLong)
+    public ResponseEntity<String> deleteEmployee(long employeeId)
     {
-        if(employeeDao.existsById(parseLong))
+        if(employeeDao.existsById(employeeId))
         {
-            Employee entity=employeeDao.getById(parseLong);
+            Employee entity=employeeDao.getById(employeeId);
             employeeDao.delete(entity);
-            return ResponseEntity.status(HttpStatus.OK).body("Employee Deleted Sucessfully");
+            return ResponseEntity.status(HttpStatus.OK).body("Employee Deleted Successfully");
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee Not Found");
     }
 
+    //It updates the Employee if it exists
     @Override
     public ResponseEntity<String> updateData(com.employee.employeeData.DTO.request.EmployeeDetails employeeDetails)
     {
@@ -93,7 +96,7 @@ public class EmployeeServiceImplementation implements EmployeeService
             employee.setDesignation(employeeDetails.getDesignation());
             LocalDateTime dateTime = LocalDateTime.now();
             employee.setUpdatedDate(dateTime);
-            Employee employee1= employeeDao.save(employee);
+            employeeDao.save(employee);
             return ResponseEntity.status(HttpStatus.OK).body("Employee Updated Successfully");
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee Not found");

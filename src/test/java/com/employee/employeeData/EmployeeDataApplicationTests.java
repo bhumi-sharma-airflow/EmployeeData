@@ -4,11 +4,9 @@ import com.employee.employeeData.Dao.EmployeeDao;
 import com.employee.employeeData.Entities.Employee;
 import com.employee.employeeData.Service.EmployeeServiceImplementation;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -19,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -40,15 +37,19 @@ class EmployeeDataApplicationTests
         LocalDateTime dateTime =LocalDateTime.now();
         Employee employee = new Employee("Bhumi",date,dateTime,dateTime,"Job");
         employee.setEmployeeId(employeeId);
+
         EmployeeDetails employeeDetails = new EmployeeDetails(employee.getEmployeeId(), employee.getEmployeeName(), employee.getJoiningDate(), employee.getDesignation());
         employeeDetails.setEmployeeId(employeeId);
         employeeDetails.setEmployeeName("Bhumi");
         employeeDetails.setJoiningDate(date);
         employeeDetails.setDesignation("Job");
-        when(employeeDao.existsById(employeeId)).thenReturn(true);
+
         ResponseEntity<EmployeeDetails> excepted = ResponseEntity.status(HttpStatus.OK).body(employeeDetails);
+        when(employeeDao.existsById(employeeId)).thenReturn(true);
         when(employeeDao.getById(employeeId)).thenReturn(employee);
+
         ResponseEntity<EmployeeDetails> actual = employeeServiceImplementation.getData(employeeId);
+
         assertEquals(actual.getBody().getEmployeeId(),excepted.getBody().getEmployeeId());
         assertEquals(actual.getBody().getEmployeeName(),excepted.getBody().getEmployeeName());
         assertEquals(actual.getBody().getDesignation(),excepted.getBody().getDesignation());
@@ -59,10 +60,14 @@ class EmployeeDataApplicationTests
 	public void givenEmployeeId_WhenDeleteRequestisRaise_thanItshouldBeDeletedFromDatabase()
 	{
 		long employeeResignedId=5;
+
         ArgumentCaptor<Long> employeeIdCapturer = ArgumentCaptor.forClass(Long.class);
+
         when(employeeDao.existsById(employeeResignedId)).thenReturn(true);
+
         employeeServiceImplementation.deleteEmployee(employeeResignedId);
         verify(employeeDao,times(1)).getById(employeeIdCapturer.capture());
+
         assertEquals(employeeResignedId, employeeIdCapturer.getValue());
 	}
 
